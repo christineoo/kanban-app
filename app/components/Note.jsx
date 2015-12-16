@@ -25,8 +25,15 @@ export default class Note extends React.Component {
   }
 
   renderNote = () => {
-    {/* props is a data structure that's passed to a component from outside */}
-    return <div onClick={this.edit}>{this.props.task}</div>;
+    const onDelete = this.props.onDelete;
+
+    return (
+      <div onClick={this.edit}>
+        {/* props is a data structure that's passed to a component from outside */}
+        <span className="task">{this.props.task}</span>
+        { onDelete ? this.renderDelete() : null }
+      </div>
+    );
   }
 
   edit = () => {
@@ -47,5 +54,9 @@ export default class Note extends React.Component {
     this.setState({
       editing: false
     });
+  }
+
+  renderDelete = () => {
+    return <button className="delete" onClick={this.props.onDelete}>x</button>;
   }
 }
